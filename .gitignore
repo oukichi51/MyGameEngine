@@ -1,0 +1,33 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+
+# Build output
+x64/
+Debug/
+Release/
+build/
+out/
+
+# C/C++ generated files
+*.obj
+*.pch
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.lib
+*.dll
+*.exe
+*.tlog
+*.lastbuildstate
+*.log
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+

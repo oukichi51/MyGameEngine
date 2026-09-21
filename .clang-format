@@ -1,0 +1,7 @@
+BasedOnStyle: Microsoft
+AccessModifierOffset: -4
+IndentWidth: 4
+NamespaceIndentation: All
+PointerAlignment: Left
+ReferenceAlignment: Left
+ColumnLimit: 120
