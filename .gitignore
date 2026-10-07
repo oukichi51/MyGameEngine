@@ -14,6 +14,7 @@ out/
 
 # C/C++ generated files
 *.obj
+!assets/models/*.obj
 *.pch
 *.pdb
 *.idb
@@ -30,4 +31,3 @@ out/
 .DS_Store
 Thumbs.db
 *.swp
-

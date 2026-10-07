@@ -1,8 +1,6 @@
 #pragma once
 
 #include <memory>
-#include "Engine/Scene/Scene.h"
-
 struct HINSTANCE__;
 using HINSTANCE = HINSTANCE__*;
 
@@ -21,9 +19,6 @@ namespace MyGameEngine
 
         int Run(HINSTANCE instance, int showCommand);
 
-    private:
-        std::unique_ptr<Scene> CreateInitialScene();
-        std::unique_ptr<Scene> CreateSecondScene();
     private:
         std::unique_ptr<Engine> engine_;
     };

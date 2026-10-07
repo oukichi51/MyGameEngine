@@ -47,4 +47,9 @@ namespace MyGameEngine
     {
         return gameObjects_.size();
     }
+
+    const std::vector<std::unique_ptr<GameObject>>& Scene::GetGameObjects() const noexcept
+    {
+        return gameObjects_;
+    }
 } // namespace MyGameEngine

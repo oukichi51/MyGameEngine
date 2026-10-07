@@ -1,6 +1,9 @@
 #include "Engine/Core/Engine.h"
 #include "Engine/Core/TimeSystem.h"
 #include "Engine/Input/InputSystem.h"
+#include "Engine/Graphics/Renderer.h"
+#include "Engine/Graphics/Camera.h"
+#include "Engine/Graphics/RenderQueue.h"
 #include "Engine/Platform/Window.h"
 #include "Engine/Scene/Scene.h"
 #include "Engine/Scene/SceneManager.h"
@@ -26,6 +29,18 @@ namespace MyGameEngine
             return false;
         }
 
+        renderer_ = std::make_unique<Renderer>();
+        if (!renderer_->Initialize(window_->GetHandle(), 1280, 720))
+        {
+            Shutdown();
+            return false;
+        }
+        camera_ = std::make_unique<Camera>();
+        camera_->SetPosition(0.0f, 0.0f, -5.0f);
+        camera_->LookAt(0.0f, 0.0f, 0.0f);
+        camera_->SetPerspective(DirectX::XM_PIDIV4, 1280.0f / 720.0f, 0.1f, 100.0f);
+        renderQueue_ = std::make_unique<RenderQueue>();
+
         return true;
     }
 
@@ -48,10 +63,16 @@ namespace MyGameEngine
             }
 
             Update();
-
-            // Avoid busy-waiting until rendering and frame pacing are implemented.
-            Sleep(1);
+            Render();
         }
+    }
+
+    void Engine::Render()
+    {
+        Scene* scene = sceneManager_->GetCurrentScene();
+        if (scene == nullptr) return;
+        renderQueue_->Collect(*scene);
+        if (!renderer_->Render(*renderQueue_, *camera_)) PostQuitMessage(1);
     }
 
     void Engine::Update()
@@ -63,6 +84,13 @@ namespace MyGameEngine
 
     void Engine::Shutdown()
     {
+        renderQueue_.reset();
+        camera_.reset();
+        if (renderer_ != nullptr)
+        {
+            renderer_->Shutdown();
+            renderer_.reset();
+        }
         window_.reset();
         timeSystem_.reset();
         inputSystem_.reset();
@@ -108,7 +136,17 @@ namespace MyGameEngine
     const ResourceManager& Engine::GetResourceManager() const noexcept
     {
         return *resourceManager_;
-    } 
+    }
+
+    Renderer& Engine::GetRenderer() noexcept
+    {
+        return *renderer_;
+    }
+
+    const Renderer& Engine::GetRenderer() const noexcept
+    {
+        return *renderer_;
+    }
 
     void Engine::SetScene(std::unique_ptr<Scene> scene)
     {

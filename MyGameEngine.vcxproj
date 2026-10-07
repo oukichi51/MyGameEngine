@@ -80,14 +80,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Game\Scenes\GameScene.cpp" />
     <ClCompile Include="src\Engine\Core\Application.cpp" />
     <ClCompile Include="src\Engine\Core\Engine.cpp" />
     <ClCompile Include="src\Engine\Input\InputSystem.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Camera.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Material.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Mesh.cpp" />
+    <ClCompile Include="src\Engine\Graphics\RenderQueue.cpp" />
     <ClCompile Include="src\Engine\Platform\Window.cpp" />
     <ClCompile Include="src\Engine\Resource\ResourceManager.cpp" />
     <ClCompile Include="src\Engine\Resource\Texture.cpp" />
     <ClCompile Include="src\Engine\Scene\Component.cpp" />
     <ClCompile Include="src\Engine\Scene\Components\MoveComponent.cpp" />
+    <ClCompile Include="src\Engine\Scene\Components\MeshRenderer.cpp" />
     <ClCompile Include="src\Engine\Scene\GameObject.cpp" />
     <ClCompile Include="src\Engine\Scene\Scene.cpp" />
     <ClCompile Include="src\Engine\Scene\SceneManager.cpp" />
@@ -96,10 +103,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Scene\Component.h" />
+    <ClInclude Include="src\Game\Scenes\GameScene.h" />
     <ClInclude Include="src\Engine\Scene\Components\MoveComponent.h" />
     <ClInclude Include="src\Engine\Core\Application.h" />
     <ClInclude Include="src\Engine\Core\Engine.h" />
     <ClInclude Include="src\Engine\Input\InputSystem.h" />
+    <ClInclude Include="src\Engine\Graphics\Renderer.h" />
+    <ClInclude Include="src\Engine\Graphics\Camera.h" />
+    <ClInclude Include="src\Engine\Graphics\Material.h" />
+    <ClInclude Include="src\Engine\Graphics\Mesh.h" />
+    <ClInclude Include="src\Engine\Graphics\RenderQueue.h" />
     <ClInclude Include="src\Engine\Platform\Window.h" />
     <ClInclude Include="src\Engine\Resource\ResourceManager.h" />
     <ClInclude Include="src\Engine\Resource\Texture.h" />
@@ -107,11 +120,27 @@
     <ClInclude Include="src\Engine\Scene\Scene.h" />
     <ClInclude Include="src\Engine\Scene\SceneManager.h" />
     <ClInclude Include="src\Engine\Scene\Transform.h" />
+    <ClInclude Include="src\Engine\Scene\Components\MeshRenderer.h" />
     <ClInclude Include="src\Engine\Core\TimeSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\models\triangle.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>assets\models\triangle.obj</TargetPath>
+    </Content>
+    <Content Include="assets\shaders\Default.hlsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>assets\shaders\Default.hlsl</TargetPath>
+    </Content>
+  </ItemGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;windowscodecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

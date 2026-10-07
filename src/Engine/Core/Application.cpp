@@ -1,6 +1,7 @@
 #include "Engine/Core/Application.h"
 
 #include "Engine/Core/Engine.h"
+#include "Game/Scenes/GameScene.h"
 
 #include <Windows.h>
 
@@ -18,8 +19,7 @@ namespace MyGameEngine
             return 1;
         }
 
-        engine_->SetScene(CreateInitialScene());
-        engine_->SetScene(CreateSecondScene());
+        engine_->SetScene(std::make_unique<GameScene>());
 
         const int exitCode = engine_->Run();
         engine_->Shutdown();
@@ -27,29 +27,4 @@ namespace MyGameEngine
         return exitCode;
     }
 
-    std::unique_ptr<MyGameEngine::Scene> Application::CreateInitialScene()
-    {
-        auto scene = std::make_unique<MyGameEngine::Scene>();
-
-        auto& gameObject = scene->CreateGameObject();
-        gameObject.AddComponent<MyGameEngine::MoveComponent>();
-
-        MoveComponent* moveComponent = gameObject.GetComponent<MoveComponent>();
-        if (moveComponent != nullptr)
-        {
-            OutputDebugStringA("MoveComponent found\n");
-        }
-
-        return scene;
-    }
-
-    std::unique_ptr<Scene> Application::CreateSecondScene()
-    {
-        auto scene = std::make_unique<Scene>();
-
-        auto& gameObject = scene->CreateGameObject();
-        gameObject.AddComponent<MoveComponent>();
-
-        return scene;
-    }
 } // namespace MyGameEngine

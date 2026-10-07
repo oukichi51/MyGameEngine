@@ -9,11 +9,11 @@
 
 namespace MyGameEngine
 {
-    class Scene final
+    class Scene
     {
     public:
         Scene() = default;
-        ~Scene() = default;
+        virtual ~Scene() = default;
 
         Scene(const Scene&) = delete;
         Scene& operator=(const Scene&) = delete;
@@ -27,6 +27,7 @@ namespace MyGameEngine
         void Clear() noexcept;
 
         [[nodiscard]] std::size_t GetGameObjectCount() const noexcept;
+        const std::vector<std::unique_ptr<GameObject>>& GetGameObjects() const noexcept;
 
     private:
         std::vector<std::unique_ptr<GameObject>> gameObjects_;

@@ -12,6 +12,9 @@ namespace MyGameEngine
     class Scene;
     class SceneManager;
     class ResourceManager;
+    class Renderer;
+    class Camera;
+    class RenderQueue;
     class Window;
 
     class Engine final
@@ -35,16 +38,22 @@ namespace MyGameEngine
         const SceneManager& GetSceneManager() const noexcept;
         ResourceManager& GetResourceManager() noexcept;
         const ResourceManager& GetResourceManager() const noexcept;
+        Renderer& GetRenderer() noexcept;
+        const Renderer& GetRenderer() const noexcept;
 
         void SetScene(std::unique_ptr<Scene> scene);
 
     private:
         void Update();
+        void Render();
     private:
         std::unique_ptr<InputSystem> inputSystem_;
         std::unique_ptr<TimeSystem> timeSystem_;
         std::unique_ptr<SceneManager> sceneManager_;
         std::unique_ptr<ResourceManager> resourceManager_;
         std::unique_ptr<Window> window_;
+        std::unique_ptr<Renderer> renderer_;
+        std::unique_ptr<Camera> camera_;
+        std::unique_ptr<RenderQueue> renderQueue_;
     };
 } // namespace MyGameEngine
